@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Wallet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Press Start 2P", sans-serif;
+            background-color: #0c0c0d;
+            color: #f4f4f5;
+            height: 200vh; /* Extra height for scrolling */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Welcome Page (Floating Screen) */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(12, 12, 13, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            z-index: 10;
+        }
+
+        /* Hide Welcome Screen on Scroll */
+        .hidden {
+            opacity: 0;
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+
+        /* Sidebar Container */
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            left: 30px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Button Styling */
+        .btn {
+            line-height: 1.8rem;
+            border-radius: 9.5px;
+            display: inline-flex;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            position: relative;
+            background-color: #18181b;
+            color: #f4f4f5;
+            transition: background-color 0.2s ease-in-out;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            width: 150px;
+        }
+
+        .btn:hover {
+            background-color: #0c0c0d;
+        }
+
+        .btn:before {
+            content: "";
+            position: absolute;
+            background: linear-gradient(to right, rgb(0, 220, 130), rgb(0, 220, 130), rgb(0, 220, 130));
+            inset: -2px;
+            z-index: -1;
+            border-radius: 12.5px;
+            transition: all 0.2s ease 0s;
+        }
+
+        .btn:hover:before {
+            box-shadow: rgba(0, 220, 130, 0.5) 0px 0px 10px 0px,
+                        rgba(0, 220, 130, 0.5) 0px 0px 20px 0px;
+        }
+
+        /* Description Styling */
+        .descriptions {
+            position: fixed;
+            top: 50%;
+            left: 200px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .description {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            line-height: 5.0rem;
+        }
+
+        /* Show descriptions only when hovered */
+        .sidebar:hover + .descriptions {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <span>Welcome to Safe Wallet</span>
+    </div>
+
+    <!-- Sidebar Buttons -->
+    <div class="sidebar" id="sidebar">
+        <a class="btn"><span>Transfer Now</span></a>
+        <a class="btn"><span>Token Transfer</span></a> 
+        <a class="btn"><span>Sweeper Bot</span></a>
+        <a class="btn"><span>Self Destruct</span></a>
+
+    </div>
+
+    <!-- Descriptions (Only Visible When Sidebar is Hovered) -->
+    <div class="descriptions">
+        <p class="description">Initiates an immediate transfer process.</p>
+        <p class="description">Facilitates token transfers between wallet addresses.</p>
+        <p class="description">Automates the process of clearing unwanted items.</p>
+        <p class="description">Triggers a self-destruction sequence.</p>
+    </div>
+
+    <script>
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener("scroll", function() {
+            let currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY) {
+                // Scrolling down - Hide Welcome Screen
+                document.getElementById("welcomeScreen").classList.add("hidden");
+            } else {
+                // Scrolling up - Show Welcome Screen
+                document.getElementById("welcomeScreen").classList.remove("hidden");
+            }
+
+            lastScrollY = currentScrollY;
+        });
+    </script>
+
+</body>
+</html>

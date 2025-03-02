@@ -1,0 +1,10 @@
+[
+    {
+        "timestamp": "2025-02-19 20:41:25",
+        "message": "Total cost: 1630000000000  Balance: 1453244456000"
+    },
+    {
+        "timestamp": "2025-02-19 20:41:25",
+        "message": "Insufficient funds to cover transaction and gas fees"
+    }
+]
